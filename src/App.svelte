@@ -18,13 +18,12 @@
   let valid = $derived(todoDesc.length > 0);
   let invalid = $derived(!valid);
 
-  /** @param {SubmitEvent} event*/
-  function addTodo(event) {
-    event.preventDefault();
+  /** @param {string} description*/
+  function addTodo(description) {
     /** @type {Item} */
     let newTodo = {
       id: crypto.randomUUID(),
-      description: todoDesc,
+      description,
       completed: false,
     };
     todoList.push(newTodo);
@@ -63,7 +62,12 @@
     </p>
     <p>Add your first todo!</p>
   </div>
-  <form onsubmit={addTodo}>
+  <form
+    onsubmit={(e) => {
+      e.preventDefault();
+      addTodo(todoDesc);
+    }}
+  >
     <label for="add-todo" class="visually-hidden">Add a todo item</label>
     <input
       id="add-todo"
