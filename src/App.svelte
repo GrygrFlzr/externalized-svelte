@@ -1,14 +1,23 @@
 <script>
   let liveDescription = $state("");
 
+  /** @type {import('./lib/Item.svelte').Item[]} */
+  let todoList = $state([]);
   let todoDesc = $state("");
 
   let valid = $derived(todoDesc.length > 0);
   let invalid = $derived(!valid);
 
   /** @param {SubmitEvent} event*/
-  async function addTodo(event) {
+  function addTodo(event) {
     event.preventDefault();
+    /** @type {import('./lib/Item.svelte').Item} */
+    let newTodo = {
+      id: crypto.randomUUID(),
+      description: todoDesc,
+      completed: false,
+    };
+    todoList.push(newTodo);
     liveDescription = `"${todoDesc}" added.`;
     todoDesc = "";
   }
@@ -17,9 +26,14 @@
 <section aria-labelledby="todos-label">
   <h1 id="todos-label">stuff to do</h1>
   <ul>
-    <li>Do laundry</li>
-    <li>Cook dinner</li>
-    <li>Find a bird</li>
+    {#each todoList as todo (todo.id)}
+      <li>
+        <label class="todo-item">
+          <input type="checkbox" bind:checked={todo.completed} />
+          <span>{todo.description}</span>
+        </label>
+      </li>
+    {/each}
   </ul>
   <div class="empty-state">
     <p>
@@ -63,5 +77,8 @@
   #add-todo::placeholder {
     /** TODO: set color of placeholder text */
     font-style: italic;
+  }
+  .todo-item :checked + span {
+    text-decoration: line-through;
   }
 </style>
