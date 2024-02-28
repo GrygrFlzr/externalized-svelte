@@ -88,6 +88,17 @@
     outline: none;
   }
 
+  section {
+    border: 4px solid black;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-width: 40ch;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
   .visually-hidden {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px) !important;
@@ -100,8 +111,15 @@
   .empty-state {
     display: none;
   }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
   ul:empty + .empty-state {
     display: block;
+  }
+  li [type="checkbox"] {
+    border: 2px solid black;
   }
   #add-todo::placeholder {
     /** TODO: set color of placeholder text */
