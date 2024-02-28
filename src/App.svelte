@@ -31,7 +31,7 @@
 </script>
 
 <section aria-labelledby="todos-label">
-  <h1 id="todos-label">stuff to do</h1>
+  <h1 id="todos-label" tabindex="-1">stuff to do</h1>
   <ul>
     {#each todoList as todo (todo.id)}
       <li>
@@ -70,6 +70,10 @@
 </section>
 
 <style>
+  [tabindex="-1"] {
+    outline: none;
+  }
+
   .visually-hidden {
     position: absolute !important;
     clip: rect(1px, 1px, 1px, 1px) !important;
