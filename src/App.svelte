@@ -1,7 +1,17 @@
+<script context="module">
+  /**
+   * @typedef {{
+   *    id: `${string}-${string}-${string}-${string}-${string}`;
+   *    description: string;
+   *    completed: boolean;
+   * }} Item
+   */
+</script>
+
 <script>
   let liveDescription = $state("");
 
-  /** @type {import('./lib/Item.svelte').Item[]} */
+  /** @type {Item[]} */
   let todoList = $state([]);
   let todoDesc = $state("");
 
@@ -11,7 +21,7 @@
   /** @param {SubmitEvent} event*/
   function addTodo(event) {
     event.preventDefault();
-    /** @type {import('./lib/Item.svelte').Item} */
+    /** @type {Item} */
     let newTodo = {
       id: crypto.randomUUID(),
       description: todoDesc,
@@ -22,7 +32,7 @@
     todoDesc = "";
   }
 
-  /** @param {import('./lib/Item.svelte').Item} item */
+  /** @param {Item} item */
   function removeTodo(item) {
     const itemIndex = todoList.indexOf(item);
     todoList.splice(itemIndex, 1);
