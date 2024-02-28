@@ -1,6 +1,17 @@
 <script>
-  let valid = $state(true);
+  let liveDescription = $state("");
+
+  let todoDesc = $state("");
+
+  let valid = $derived(todoDesc.length > 0);
   let invalid = $derived(!valid);
+
+  /** @param {SubmitEvent} event*/
+  async function addTodo(event) {
+    event.preventDefault();
+    liveDescription = `"${todoDesc}" added.`;
+    todoDesc = "";
+  }
 </script>
 
 <section aria-labelledby="todos-label">
@@ -17,16 +28,20 @@
     </p>
     <p>Add your first todo!</p>
   </div>
-  <form>
+  <form onsubmit={addTodo}>
     <label for="add-todo" class="visually-hidden">Add a todo item</label>
     <input
       id="add-todo"
       type="text"
       placeholder="E.g. adopt an owl"
       aria-invalid={invalid}
+      bind:value={todoDesc}
     />
     <button type="submit" disabled={invalid}>Add</button>
   </form>
+  <div role="status" aria-live="polite" class="visually-hidden">
+    {liveDescription}
+  </div>
 </section>
 
 <style>
