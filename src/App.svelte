@@ -21,6 +21,13 @@
     liveDescription = `"${todoDesc}" added.`;
     todoDesc = "";
   }
+
+  /** @param {import('./lib/Item.svelte').Item} item */
+  function removeTodo(item) {
+    const itemIndex = todoList.indexOf(item);
+    todoList.splice(itemIndex, 1);
+    liveDescription = `"${item.description}" removed.`;
+  }
 </script>
 
 <section aria-labelledby="todos-label">
@@ -31,6 +38,10 @@
         <label class="todo-item">
           <input type="checkbox" bind:checked={todo.completed} />
           <span>{todo.description}</span>
+          <button onclick={() => removeTodo(todo)}>
+            &cross;
+            <span class="visually-hidden">delete {todo.description}</span>
+          </button>
         </label>
       </li>
     {/each}
