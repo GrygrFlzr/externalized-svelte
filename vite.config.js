@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => ({
                   '<script type="importmap"></script>',
                   `<script type="importmap">${JSON.stringify(
                     generator.getMap()
-                  )}</script>`
+                  )}</script><!-- ES Module Shims: Import maps polyfill for older browsers without import maps support (eg Safari 16.3) --><script async src="https://ga.jspm.io/npm:es-module-shims@1.8.3/dist/es-module-shims.js" crossorigin="anonymous"></script>`
                 );
               }
             : (html) => html,
