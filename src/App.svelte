@@ -9,6 +9,7 @@
 </script>
 
 <script>
+  import { fly } from 'svelte/transition'
   let liveDescription = $state("");
 
   /** @type {Item[]} */
@@ -43,7 +44,7 @@
   <h1 id="todos-label" tabindex="-1">stuff to do</h1>
   <ul>
     {#each todoList as todo (todo.id)}
-      <li>
+      <li transition:fly={{ y: 10 }}>
         <label class="todo-item">
           <input type="checkbox" bind:checked={todo.completed} />
           <span>{todo.description}</span>
