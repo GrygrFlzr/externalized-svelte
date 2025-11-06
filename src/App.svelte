@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
   /**
    * @typedef {{
    *    id: `${string}-${string}-${string}-${string}-${string}`;
